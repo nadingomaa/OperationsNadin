@@ -20,21 +20,39 @@ public class DivActivity extends AppCompatActivity {
         EditText val2 =findViewById(R.id.val2);
         TextView result=findViewById(R.id.result);
         int part1,part2;
-        if(val1.getText().toString()!="" ) {
+        if(val1.getText().length()==0) {
 
-            part1 = Integer.parseInt(val1.getText().toString());
-        }
-        else{
+            val1.setError("  you didn't enter number");
             part1=0;
         }
-
-        if(val2.getText().toString()!="" ) {
-
-            part2 = Integer.parseInt(val2.getText().toString());
-        }
         else {
-            part2 = 0;
+            part1 = Integer.parseInt(val1.getText().toString());
         }
+
+
+
+        if(val2.getText().length()==0 )
+        {
+            val2.setError("you didn't enter number");
+            part2=1;         //ماينفعش تكون 0 عشان القسمه
+        }
+
+        else {
+            if(Integer.parseInt(val2.getText().toString())==0)
+            {
+                // ماينفعش اقسم علي 0
+                result.setText("error");
+                val2.setError("you enter 0 !");
+                return;
+            }
+            else
+            {
+            part2 = Integer.parseInt(val2.getText().toString());
+
+            }
+
+        }
+
 
         int realResult=div(part1,part2);
         result.setText(""+realResult);
